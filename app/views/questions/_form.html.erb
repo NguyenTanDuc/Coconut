@@ -1,0 +1,21 @@
+<%= render 'shared/errors', object: @question %>
+
+<%= form_for @question do |f| %>
+  <div>
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+  </div>
+
+  <p><strong>Answers: </strong></p>
+
+  <div id="answers">
+    <%= f.fields_for :answers do |answer| %>
+      <%= render "answer_fields", f: answer %>
+    <% end %>
+    <%= link_to_add_association 'add answer', f, :answers %>
+
+    <p class="count">Total: <span><%= @question.answers.count %></span></p>
+  </div>
+
+  <%= f.submit %>
+<% end %>
